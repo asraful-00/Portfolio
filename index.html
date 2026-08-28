@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Md. Asraful Islam — Portfolio</title>
+<meta name="description" content="Md. Asraful Islam — a personal portfolio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #10151E;
+    --bg-alt: #161D28;
+    --panel: #182030;
+    --line: #2B3646;
+    --line-soft: #202A38;
+    --text: #EDE7DA;
+    --text-dim: #93A0B3;
+    --text-faint: #57657A;
+    --gold: #D9A441;
+    --sage: #7CAF9A;
+    --radius: 6px;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3{ font-family:'Instrument Serif', serif; font-weight:400; }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:880px; margin:0 auto; padding:0 32px; }
+  @media (max-width:600px){ .wrap{ padding:0 20px; } }
+
+  /* faint topographic-line texture */
+  body::before{
+    content:"";
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    opacity:0.5;
+    background-image:
+      repeating-radial-gradient(circle at 15% 20%, transparent 0, transparent 60px, rgba(217,164,65,0.025) 61px, transparent 62px),
+      repeating-radial-gradient(circle at 85% 75%, transparent 0, transparent 90px, rgba(124,175,154,0.025) 91px, transparent 92px);
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(16,21,30,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:58px; }
+  .nav-mark{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--text-dim); letter-spacing:0.04em; }
+  .nav-mark b{ color:var(--gold); font-weight:500; }
+  .nav-links{ display:flex; gap:26px; font-size:12px; font-family:'IBM Plex Mono', monospace; color:var(--text-dim); }
+  .nav-links a:hover{ color:var(--gold); }
+  @media (max-width:560px){ .nav-links{ display:none; } }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    min-height:100svh;
+    display:flex; flex-direction:column; justify-content:center;
+    position:relative; z-index:1;
+    padding-top:58px;
+  }
+
+  .compass{
+    width:34px; height:34px;
+    border:1px solid var(--gold);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:26px;
+    position:relative;
+  }
+  .compass::before{
+    content:"";
+    width:0; height:0;
+    border-left:4px solid transparent;
+    border-right:4px solid transparent;
+    border-bottom:11px solid var(--gold);
+    transform:rotate(35deg) translateY(-1px);
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--sage);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin-bottom:20px;
+  }
+
+  h1.name{
+    font-size:clamp(3rem, 7vw, 5rem);
+    font-style:italic;
+    line-height:1.05;
+    color:var(--text);
+    margin-bottom:26px;
+    max-width:11ch;
+  }
+
+  .tagline{
+    font-size:clamp(1.05rem, 2vw, 1.2rem);
+    color:var(--text-dim);
+    max-width:540px;
+    margin-bottom:40px;
+  }
+
+  .cta-row{ display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--gold);
+    color:#161107;
+    font-weight:600;
+    font-size:14px;
+    padding:13px 24px;
+    border-radius:3px;
+    font-family:'Work Sans', sans-serif;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{ transform:translateY(-1px); box-shadow:0 6px 20px rgba(217,164,65,0.22); }
+  .btn:focus-visible, a:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+  .btn-outline{
+    display:inline-flex; align-items:center; gap:8px;
+    border:1px solid var(--line);
+    color:var(--text-dim);
+    font-size:13px;
+    font-family:'IBM Plex Mono', monospace;
+    padding:12px 20px;
+    border-radius:3px;
+    transition:border-color .2s, color .2s;
+  }
+  .btn-outline:hover{ border-color:var(--sage); color:var(--sage); }
+
+  .coords{
+    margin-top:64px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--text-faint);
+    display:flex; gap:24px; flex-wrap:wrap;
+  }
+
+  /* ---------- SECTION HEADER ---------- */
+  section{ padding:110px 0; position:relative; z-index:1; }
+  .sec-head{ margin-bottom:56px; }
+  .sec-eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--sage); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px; }
+  .sec-title{ font-size:clamp(1.9rem, 3.4vw, 2.6rem); font-style:italic; }
+  .sec-sub{ color:var(--text-dim); margin-top:12px; max-width:520px; font-size:15px; }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns:170px 1fr; gap:48px; align-items:start; }
+  @media (max-width:640px){ .about-grid{ grid-template-columns:1fr; } }
+
+  .photo-slot{
+    width:170px; height:170px; border-radius:50%;
+    background:var(--panel);
+    border:1px dashed var(--line);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+    color:var(--text-faint); font-family:'IBM Plex Mono', monospace; font-size:10.5px; text-align:center; line-height:1.5;
+  }
+  .photo-slot img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+  .about-text p{ color:var(--text-dim); margin-bottom:16px; font-size:16px; max-width:58ch; }
+  .about-text strong{ color:var(--text); font-weight:600; }
+
+  /* ---------- ROUTE / JOURNEY ---------- */
+  .route{ position:relative; padding-left:46px; }
+  .route + .route{ margin-top:52px; }
+  .route::before{
+    content:"";
+    position:absolute; left:11px; top:8px; bottom:8px;
+    width:1px;
+    background:repeating-linear-gradient(to bottom, var(--line) 0, var(--line) 6px, transparent 6px, transparent 12px);
+  }
+
+  .stop{ position:relative; margin-bottom:48px; }
+  .stop:last-child{ margin-bottom:0; }
+
+  .stop-pin{
+    position:absolute; left:-46px; top:2px;
+    width:23px; height:23px; border-radius:50%;
+    background:var(--bg);
+    border:1px solid var(--stop-color, var(--gold));
+    display:flex; align-items:center; justify-content:center;
+  }
+  .stop-pin::after{ content:""; width:7px; height:7px; border-radius:50%; background:var(--stop-color, var(--gold)); }
+
+  .stop.current .stop-pin{ box-shadow:0 0 0 5px rgba(217,164,65,0.12); }
+
+  .stop-tag{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--stop-color, var(--gold)); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px; }
+  .stop-title{ font-family:'Instrument Serif', serif; font-style:italic; font-size:22px; margin-bottom:3px; }
+  .stop-org{ color:var(--text-dim); font-size:13.5px; margin-bottom:10px; }
+  .stop-desc{ color:var(--text-dim); font-size:14.5px; max-width:56ch; }
+
+  .route-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--text-faint);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    margin:0 0 24px 0;
+  }
+  .route-label:not(:first-child){ margin-top:56px; }
+
+  .here-badge{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'IBM Plex Mono', monospace; font-size:10.5px;
+    color:var(--gold); border:1px solid var(--gold);
+    padding:3px 9px; border-radius:20px; margin-top:10px;
+  }
+  .here-badge::before{ content:"●"; font-size:8px; }
+
+  /* ---------- HOW I WORK ---------- */
+  .traits{ display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; }
+  @media (max-width:640px){ .traits{ grid-template-columns:1fr; } }
+
+  .trait-card{
+    background:var(--panel);
+    border:1px solid var(--line-soft);
+    border-radius:5px;
+    padding:26px 22px;
+  }
+  .trait-card .num{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--sage); margin-bottom:14px; }
+  .trait-card h3{ font-size:20px; font-style:italic; margin-bottom:8px; }
+  .trait-card p{ color:var(--text-dim); font-size:14px; }
+
+  /* ---------- CONTACT ---------- */
+  .basecamp{
+    background:var(--panel);
+    border:1px solid var(--line-soft);
+    border-radius:var(--radius);
+    padding:40px;
+    position:relative;
+  }
+  @media (max-width:600px){ .basecamp{ padding:26px 22px; } }
+
+  .basecamp-label{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--sage); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:22px; }
+
+  .contact-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:15px 0;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .contact-row:last-child{ border-bottom:none; }
+  .contact-row .k{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.05em; }
+  .contact-row .v{ font-family:'Instrument Serif', serif; font-style:italic; font-size:19px; color:var(--text); }
+  .contact-row a.v:hover{ color:var(--gold); }
+
+  footer{ text-align:center; padding:44px 0 60px; color:var(--text-faint); font-family:'IBM Plex Mono', monospace; font-size:11px; position:relative; z-index:1; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-mark"><b>ASRAFUL</b> — the route so far</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#journey">Journey</a>
+      <a href="#how">How I Work</a>
+      <a href="#hobbies">Hobbies</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="compass"></div>
+    <div class="eyebrow">Freelancer · Team Player · Business</div>
+    <h1 class="name">Md. Asraful<br>Islam</h1>
+    <p class="tagline">I've worked freelance, collaborated as part of a team, and currently help run a family business. Most of what I know, I picked up simply by starting — a project in university, some freelance work along the way, and now this business. I'm still learning new things and working toward settling into one career path.</p>
+    <div class="cta-row">
+      <a class="btn" href="#contact">Get in touch</a>
+      <a class="btn-outline" href="#journey">↓ See the route</a>
+    </div>
+    <div class="coords">
+      <span>ORIGIN — 2018, University</span>
+      <span>CURRENT — Family Business, since 2023</span>
+      <span>NEXT — Undecided</span>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">About</div>
+      <h2 class="sec-title">A bit about me</h2>
+    </div>
+    <div class="about-grid">
+      <div class="photo-slot" id="photoSlot">add<br>profile.jpg<br>to this folder</div>
+      <div class="about-text">
+        <p>I'm <strong>Md. Asraful Islam</strong>, a graduate in Computing Information System from Daffodil International University. My path hasn't been a straight line — a bit of coding, some freelance work, and now helping run a business with my family.</p>
+        <p>I'd rather learn something by doing it than by reading about it first. That's how most of what I know came together.</p>
+        <p>Right now I'm focused on the family business, but I'm always curious about what's next.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="journey">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Journey</div>
+      <h2 class="sec-title">The route so far</h2>
+      <p class="sec-sub">Each stop below is a place I stopped to learn something before moving on to the next.</p>
+    </div>
+
+    <div class="route">
+      <div class="route-label">Education</div>
+
+      <div class="stop" style="--stop-color:var(--sage)">
+        <div class="stop-pin"></div>
+        <div class="stop-tag mono">2018 — 2022</div>
+        <div class="stop-title">B.Sc in Computing Information System</div>
+        <div class="stop-org">Daffodil International University</div>
+        <p class="stop-desc">For my final year project, I built a working application using PHP and Laravel — my first real experience taking something from an idea to a finished, working product.</p>
+      </div>
+
+    </div>
+
+    <div class="route">
+      <div class="route-label">Experience</div>
+
+      <div class="stop" style="--stop-color:#8CA5D6">
+        <div class="stop-pin"></div>
+        <div class="stop-tag mono">2019 — 3 months</div>
+        <div class="stop-title">First steps into building for the web</div>
+        <div class="stop-org">Early, small projects</div>
+        <p class="stop-desc">A short stretch spent learning the basics of front-end development through a few beginner projects — nothing polished, but it's where I started.</p>
+      </div>
+
+      <div class="stop" style="--stop-color:#D97757">
+        <div class="stop-pin"></div>
+        <div class="stop-tag mono">2021 — 6 months</div>
+        <div class="stop-title">Freelance video editing</div>
+        <div class="stop-org">Fiverr, working within a small team</div>
+        <p class="stop-desc">Edited wedding videos for clients, working closely with a team to meet deadlines and deliver something people would treasure.</p>
+      </div>
+
+      <div class="stop current" style="--stop-color:var(--gold)">
+        <div class="stop-pin"></div>
+        <div class="stop-tag mono">2023 — Present</div>
+        <div class="stop-title">Helping run the family business</div>
+        <div class="stop-org">Family-owned</div>
+        <p class="stop-desc">Working alongside my father in our family business, learning what it actually takes to keep something running day to day.</p>
+        <div class="here-badge">You are here</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">How I Work</div>
+      <h2 class="sec-title">What stays the same</h2>
+      <p class="sec-sub">The road changes, but a few things carry through every stop.</p>
+    </div>
+    <div class="traits">
+      <div class="trait-card">
+        <div class="num mono">01</div>
+        <h3>Fast learner</h3>
+        <p>I don't wait until I feel ready. I get into something new and figure it out as I go.</p>
+      </div>
+      <div class="trait-card">
+        <div class="num mono">02</div>
+        <h3>Writer</h3>
+        <p>I think better with a pen or a keyboard in hand. Writing is how I sort out what I actually mean.</p>
+      </div>
+      <div class="trait-card">
+        <div class="num mono">03</div>
+        <h3>Problem solver</h3>
+        <p>Give me something that doesn't work yet, and I'll enjoy figuring out why — and how to fix it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="hobbies">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Outside of Work</div>
+      <h2 class="sec-title">What I do for fun</h2>
+    </div>
+    <div class="traits">
+      <div class="trait-card">
+        <div class="num mono">—</div>
+        <h3>Playing games</h3>
+        <p>A good way to switch off, and honestly, a decent teacher of patience and problem solving too.</p>
+      </div>
+      <div class="trait-card">
+        <div class="num mono">—</div>
+        <h3>Writing</h3>
+        <p>I write to think things through, not just to put words down.</p>
+      </div>
+      <div class="trait-card">
+        <div class="num mono">—</div>
+        <h3>Learning new things</h3>
+        <p>Doesn't matter what it is — if it's new to me, I'll probably try to pick it up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Contact</div>
+      <h2 class="sec-title">Let's talk</h2>
+      <p class="sec-sub">Open to conversations, projects, or just a good exchange of ideas.</p>
+    </div>
+    <div class="basecamp">
+      <div class="basecamp-label">Basecamp — Reach me here</div>
+      <div class="contact-row">
+        <span class="k">Email</span>
+        <a class="v" href="mailto:asraful19956@gmail.com">asraful19956@gmail.com</a>
+      </div>
+      <div class="contact-row">
+        <span class="k">Phone</span>
+        <a class="v" href="tel:+8801687837974">01687837974</a>
+      </div>
+      <div class="contact-row">
+        <span class="k">Location</span>
+        <span class="v">Bangladesh</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © <span id="year"></span> Md. Asraful Islam
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
